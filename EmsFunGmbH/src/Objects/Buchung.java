@@ -10,6 +10,10 @@ public class Buchung
 	private boolean _stoniert;
 	private boolean _rechnungErstellt;
 	
+	public Buchung()
+	{
+	}
+	
 	public int getBuchungID() 
 	{
 		return _buchungID;
