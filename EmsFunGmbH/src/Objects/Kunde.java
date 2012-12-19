@@ -84,4 +84,5 @@ public class Kunde
 	{
 		this._email = _email;
 	}
+
 }
