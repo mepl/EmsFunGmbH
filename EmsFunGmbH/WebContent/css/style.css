@@ -1,0 +1,191 @@
+			.{
+			margin:0px;
+			padding:0px;
+			}
+
+			.out{
+			width:1280px;
+			height:768px;
+			margin-left:auto;
+			margin-right:auto;
+			margin-top:50px;
+			border:5px solid purple;
+			}
+
+			.header{
+			width:100%;
+			height:76px;
+			font-size:40px;
+			color:white;
+			background-color:#990099;
+			}
+
+			.main{
+			width:1270px;
+			height:674px;
+			margin-left:0px;
+			margin-top:0px;
+			}
+			
+			.overview{
+			width:98%;
+			height:35px;
+			border: 3px solid indigo;
+			border-radius: 10px;
+			background-color:#990099;
+			color:white;
+			font-size:30px;
+			margin-left:auto;
+			margin-right:auto;
+			}
+			
+			.button {
+			font-family: Courier New;
+			color: purple;
+			font-size:15px;
+			padding-right:28px;
+			padding-left:24px;
+			text-decoration: none;
+			border-radius: 60px;
+			border:solid purple 1px;
+			background:white;
+			
+			}
+			
+			.button:hover {
+			background: purple;
+			color: white;
+			}
+			
+			#Eventtable{
+			width:98%;
+			margin-left: auto;
+			margin-right: auto;
+			}
+			
+			#Eventtable td {
+			width: 45%;
+			}
+			
+			#Eventtable input {
+			width: 98%;
+			}
+			
+			#Eventdatentable{
+			width:98%;
+			margin-left: auto;
+			margin-right: auto;
+			}
+			
+			#Eventdatentable td {
+			width: 5%;
+			}
+			
+			#Eventdatentable input {
+			width: 98%;
+			}
+			
+			#Kategorientable{
+			width:98%;
+			margin-left: auto;
+			margin-right: auto;
+			}
+			
+			#Kategorientable td {
+			width: 45%;
+			}
+			
+			#Kategorientable input {
+			width: 98%;
+			}
+			
+			#Eventveranstaltertable{
+			width:98%;
+			margin-left: auto;
+			margin-right: auto;
+			}
+			
+			#Eventveranstaltertable td {
+			width: 5%;
+			}
+			
+			#Eventveranstaltertable input {
+			width: 98%;
+			}
+			
+			#logo{
+			border: 2px solid white;
+			width:300px;
+			height:73px;
+			float:right;
+			}
+			
+			.add{
+			float:right;
+			border:2px solid indigo;
+			border-radius: 60px;
+			width:150px;
+			height:30px;
+			background-color: white;
+			color:purple;
+			margin-right:10px;
+			margin-top: 3px;
+			}
+			
+			.add:hover {
+			background-color:#AA98ED;
+			color:white;
+			
+			}
+			
+			.footer{
+			width:100%;
+			height:18px;
+			background-color:#990099;
+			color:white;
+			margin-top:0px;
+			}
+
+			#tabs {
+			  overflow:hidden;
+			  width:100%;
+			  height:665px;
+			 }
+
+			#tabs li {
+			  float: left;
+			  list-style-type: none;
+			}
+
+			#tabs a {
+			  float: left;
+			  position: relative;
+			  padding: 0 40px;
+			  height: 0; 
+			  line-height: 40px;
+			  text-transform: uppercase;
+			  text-decoration: none;
+			  color: #fff;
+			  border-right: 30px solid transparent;
+			  border-bottom: 30px solid #3D3D3D;
+			  border-bottom-color: blue;
+			  opacity: .3;
+			}
+
+			#tabs a:hover,
+			#tabs a:focus {
+			  border-bottom-color: purple;
+			  opacity: 1;
+			}
+			
+			.scroll {
+			width:98%;
+			height:200px;
+			overflow:scroll;
+			}
+			
+			
+			
+			
+
+			

@@ -1,60 +1,126 @@
 package Datenbank;
+
 import java.sql.*;
 import java.util.ArrayList;
 import Objects.*;
 
-public class DataAccess 
-{
-	///////////////////   Variablen   ///////////////////
-	
+public class DataAccess {
+	// ///////////////// Variablen ///////////////////
+
 	private static StringBuilder builder;
 	private static String sDbDrv = "com.mysql.jdbc.Driver";
-	private static String sDbUrl = "jdbc:mysql://localhost:3306/eventmanagementsystem";
-	private static String sUsr   = "root";
-	private static String sPwd   = "";
-//	private String stbl   = tbl;
-//	private String sIdColName = idColName;
-	private static String sSql;
-	
-	///////////////////   Methods   ///////////////////
-	
-	private static void sendSQL(String str)
+	private static String sDbUrl = "jdbc:mysql://localhost:3306/kundenbuchungssystem";
+	private static String sUsr = "root";
+	private static String sPwd = "";
+
+	// ///////////////// Interfaces ///////////////////
+
+	private interface SQLReader 
 	{
-		Connection cn = null;
-    	Statement  st = null;
-    	ResultSet  rs = null;
-    	
+		Object read(ResultSet res);
+	}
+
+	// ///////////////// Methods ///////////////////
+
+	private static void sendSQL(String command) 
+	{
+		Connection connection = null;
+		Statement statement = null;
+
 		try {
-			Class.forName( sDbDrv );
-		cn = DriverManager.getConnection( sDbUrl, sUsr, sPwd );
-		st = cn.createStatement();
-		rs = st.executeQuery( sSql );
-		ResultSetMetaData rsmd = rs.getMetaData();
-		int n = rsmd.getColumnCount();
-		rs.next();
-		cn.close();
-		st.close();
-		rs.close();
-		
+			Class.forName(sDbDrv);
+			connection = DriverManager.getConnection(sDbUrl, sUsr, sPwd);
+			statement = connection.createStatement();
+			statement.executeUpdate(command);
+
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally {
+			try {
+				if (connection != null && !connection.isClosed())
+					connection.close();
+				if (statement != null && !statement.isClosed())
+					statement.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
-		
 	}
-	
-	///////////////////   KUNDEN   ///////////////////
-	
-	public static ArrayList<Kunde> getAllKunden()
+
+	private static Object readSQL(SQLReader reader,String command) 
 	{
-		ArrayList<Kunde> kundeList = new ArrayList<Kunde>();
-		
-		
-		
-		return kundeList;
+		Connection connection = null;
+		Statement statement = null;
+		ResultSet result = null;
+		Object obj = null;
+
+		try {
+			Class.forName(sDbDrv);
+			connection = DriverManager.getConnection(sDbUrl, sUsr, sPwd);
+			statement = connection.createStatement();
+			result = statement.executeQuery(command);
+			obj = reader.read(result);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (connection != null && !connection.isClosed())
+					connection.close();
+				if (statement != null && !statement.isClosed())
+					statement.close();
+				if (result != null && !result.isClosed())
+					result.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+
+		return obj;
 	}
-	
-	public static void updateKunden(Kunde kunde)
+
+	// ///////////////// KUNDEN ///////////////////
+
+	public static ArrayList<Kunde> getAllKunden() 
+	{
+		Object obj = readSQL(new SQLReader() {
+			public Object read(ResultSet res) {
+				try 
+				{
+					ArrayList<Kunde> kundeList = new ArrayList<Kunde>();
+					Kunde kunde = null;
+					
+					while (res.next()) {
+						
+						kunde = new Kunde();
+
+						kunde.setKundenID(res.getInt("kd_KundenID"));
+						kunde.setName(res.getString("kd_Name"));
+						kunde.setVorname(res.getString("kd_Vorname"));
+						kunde.setStrasse(res.getString("kd_Strasse"));
+						kunde.setHausNummer(res.getString("kd_HNummer"));
+						kunde.setPlz(res.getString("kd_PLZ"));
+						kunde.setOrt(res.getString("kd_Ort"));
+						kunde.setTelefon(res.getString("kd_Telefon"));
+						kunde.setEmail(res.getString("kd_EMail"));
+
+						kundeList.add(kunde);
+					}
+
+					return kundeList;
+				} 
+				catch (Exception ex)
+				{
+					ex.printStackTrace();
+					return null;
+				}
+			}
+		},"select * from tbl_Kunden;");
+		
+		return (ArrayList<Kunde>) obj;
+	}
+
+	public static void updateKunden(Kunde kunde) 
 	{
 		builder = new StringBuilder();
 		builder.append("update tbl_Kunden set kd_Name = '");
@@ -76,12 +142,11 @@ public class DataAccess
 		builder.append("' WHERE kd_KundenID = '");
 		builder.append(kunde.getKundenID());
 		builder.append("';");
-		
+
 		sendSQL(builder.toString());
 	}
-	
-	public static void insertKunden(Kunde kunde)
-	{
+
+	public static void insertKunden(Kunde kunde) {
 		builder = new StringBuilder();
 		builder.append("insert into tbl_kunden(kd_Name, kd_Vorname, kd_Strasse, kd_HNummer, kd_PLZ, kd_Ort, kd_Telefon, kd_EMail) VALUES ('");
 		builder.append(kunde.getName());
@@ -100,32 +165,60 @@ public class DataAccess
 		builder.append("','");
 		builder.append(kunde.getEmail());
 		builder.append("');");
-		
+
 		sendSQL(builder.toString());
 	}
 
-	public static void deleteKunden(Kunde kunde)
-	{
+	public static void deleteKunden(Kunde kunde) {
 		builder = new StringBuilder();
 		builder.append("DELETE FROM tbl_Kunden where kd_KundenID =");
 		builder.append(kunde.getKundenID());
 		builder.append(";");
-		
+
 		sendSQL(builder.toString());
 	}
-	
-	///////////////////   EventVeranstalter   ///////////////////
-	
-	public static ArrayList<EventVeranstalter> getAllVeranstalter()
-	{
-		ArrayList<EventVeranstalter> veranstalterList = new ArrayList<EventVeranstalter>();
+
+	// ///////////////// EventVeranstalter ///////////////////
+
+	public static ArrayList<EventVeranstalter> getAllVeranstalter() {
+
+		Object obj = readSQL(new SQLReader() {
+			public Object read(ResultSet res) {
+				try 
+				{
+					ArrayList<EventVeranstalter> veranstalterList = new ArrayList<EventVeranstalter>();
+					EventVeranstalter veranstalter = null;
+					
+					while (res.next()) {
+						
+						veranstalter = new EventVeranstalter();
+
+						veranstalter.setEventVeranstalterID(res.getInt("ev_EvVeranstalterID"));
+						veranstalter.setFirma(res.getString("ev_Firma"));
+						veranstalter.setStrasse(res.getString("ev_Strasse"));
+						veranstalter.setHausNummer(res.getString("ev_HNummer"));
+						veranstalter.setPlz(res.getString("ev_PLZ"));
+						veranstalter.setOrt(res.getString("ev_Ort"));
+						veranstalter.setTelefon(res.getString("ev_Telefon"));
+						veranstalter.setEmail(res.getString("ev_EMail"));
+
+						veranstalterList.add(veranstalter);
+					}
+
+					return veranstalterList;
+				} 
+				catch (Exception ex)
+				{
+					ex.printStackTrace();
+					return null;
+				}
+			}
+		},"select * from tbl_EvVeranstalter;");
 		
-		
-		return veranstalterList;
+		return (ArrayList<EventVeranstalter>) obj;
 	}
-	
-	public static void updateEventVeranstalter(EventVeranstalter veranstalter)
-	{
+
+	public static void updateEventVeranstalter(EventVeranstalter veranstalter) {
 		builder = new StringBuilder();
 		builder.append("update tbl_EvVeranstalter set ev_Firma = '");
 		builder.append(veranstalter.getFirma());
@@ -146,12 +239,11 @@ public class DataAccess
 		builder.append("' WHERE ev_EvVeranstalterID = ");
 		builder.append(veranstalter.getEventVeranstalterID());
 		builder.append(";");
-		
+
 		sendSQL(builder.toString());
 	}
-	
-	public static void insertEventVeranstalter(EventVeranstalter veranstalter)
-	{
+
+	public static void insertEventVeranstalter(EventVeranstalter veranstalter) {
 		builder = new StringBuilder();
 		builder.append("insert into tbl_EvVeranstalter(ev_Firma, ev_Strasse, ev_PLZ, ev_HNummer, ev_Ort, ev_Telefon, ev_EMail, ev_Fax) VALUES ('");
 		builder.append(veranstalter.getFirma());
@@ -170,72 +262,117 @@ public class DataAccess
 		builder.append("','");
 		builder.append(veranstalter.getFax());
 		builder.append("');");
-		
+
 		sendSQL(builder.toString());
 	}
-	
-	public static void deleteEventVeranstalter(EventVeranstalter veranstalter)
-	{
+
+	public static void deleteEventVeranstalter(EventVeranstalter veranstalter) {
 		builder = new StringBuilder();
 		builder.append("DELETE FROM tbl_EvVeranstalter where ev_EvVeranstalterID =");
 		builder.append(veranstalter.getEventVeranstalterID());
 		builder.append(";");
-		
+
 		sendSQL(builder.toString());
 	}
-	
-	///////////////////   EventKategorie   ///////////////////
-	
-	public static ArrayList<EventKategorie> getAllKategorie()
-	{
-		ArrayList<EventKategorie> kategorieList = new ArrayList<EventKategorie>();
+
+	// ///////////////// EventKategorie ///////////////////
+
+	public static ArrayList<EventKategorie> getAllKategorie() {
 		
+		Object obj = readSQL(new SQLReader() {
+			public Object read(ResultSet res) {
+				try 
+				{
+					ArrayList<EventKategorie> kategorieList = new ArrayList<EventKategorie>();
+					EventKategorie kategorie = null;
+					
+					while (res.next()) {
+						
+						kategorie = new EventKategorie();
+
+						kategorie.setEventKategorieID(res.getInt("ek_EvKategorieID"));
+						kategorie.setBezeichnung(res.getString("ek_KatBezeichnung"));
+
+						kategorieList.add(kategorie);
+					}
+
+					return kategorieList;
+				} 
+				catch (Exception ex)
+				{
+					ex.printStackTrace();
+					return null;
+				}
+			}
+		},"select * from tbl_EvKategorie;");
 		
-		return kategorieList;
+		return (ArrayList<EventKategorie>) obj;
 	}
-	
-	public static void updateKategorie(EventKategorie kategorie)
-	{
+
+	public static void updateKategorie(EventKategorie kategorie) {
 		builder = new StringBuilder();
 		builder.append("update tbl_EvKategorie set ek_KatBezeichnung = '");
 		builder.append(kategorie.getBezeichnung());
 		builder.append("';");
-		
+
 		sendSQL(builder.toString());
 	}
-	
-	public static void insertKategorie(EventKategorie kategorie)
-	{
+
+	public static void insertKategorie(EventKategorie kategorie) {
 		builder = new StringBuilder();
 		builder.append("insert into tbl_EvKategorie(ek_KatBezeichnung) VALUES ('");
 		builder.append(kategorie.getBezeichnung());
 		builder.append("');");
-		
+
 		sendSQL(builder.toString());
 	}
-	
-	public static void deleteKategorie(EventKategorie kategorie)
+
+	public static void deleteKategorie(EventKategorie kategorie) 
 	{
 		builder = new StringBuilder();
 		builder.append("delete from tbl_EvKategorie where ek_EvKategorieID = ");
 		builder.append(kategorie.getEventKategorieID());
 		builder.append(";");
-		
+
 		sendSQL(builder.toString());
 	}
-	
-	///////////////////   Events   ///////////////////
-	
-	public static ArrayList<Event> getAllEvents()
-	{
-		ArrayList<Event> eventList = new ArrayList<Event>();
-		
-		
-		return eventList;
+
+	// ///////////////// Events ///////////////////
+
+	public static ArrayList<Event> getAllEvents() {
+		Object obj = readSQL(new SQLReader() {
+			public Object read(ResultSet res) {
+				try {
+
+					ArrayList<Event> eventList = new ArrayList<Event>();
+					Event event= null;
+					while (res.next()) {
+						event = new Event();
+
+						event.setEventID(res.getInt("et_EventID"));
+						event.setEventVeranstalterID(res.getInt("ev_EvVeranstalterID"));
+						event.setEventKategorieID(res.getInt("ek_EvKategorieID"));
+						event.setBezeichnung(res.getString("et_Bezeichnung"));
+						event.setBeschreibung(res.getString("et_Beschreibung"));
+
+						eventList.add(event);
+					}
+
+					return eventList;
+				} 
+				catch (Exception ex)
+				{
+					ex.printStackTrace();
+					return null;
+				}
+			}
+		},"select * from tbl_Events");
+
+		return (ArrayList<Event>) obj;
 	}
-	
-	public static void updateEvents(Event event)
-	{
+
+	public static void updateEvents(Event event) {
+		
 		builder = new StringBuilder();
 		builder.append("update tbl_Events set ev_EvVeranstalterID = ");
 		builder.append(event.getEventVeranstalterID());
@@ -248,12 +385,12 @@ public class DataAccess
 		builder.append("' WHERE et_EventID = ;");
 		builder.append(event.getEventID());
 		builder.append(";");
-		
+
 		sendSQL(builder.toString());
 	}
-	
-	public static void insertEvents(Event event)
-	{
+
+	public static void insertEvents(Event event) {
+		
 		builder = new StringBuilder();
 		builder.append("insert into tbl_Events(ev_EvVeranstalterID,ek_EvKategorieID,et_Bezeichnung,et_Beschreibung) VALUES (");
 		builder.append(event.getEventVeranstalterID());
@@ -264,32 +401,64 @@ public class DataAccess
 		builder.append("','");
 		builder.append(event.getBeschreibung());
 		builder.append("');");
-		
+
 		sendSQL(builder.toString());
 	}
-	
-	public static void deleteEvents(Event event)
-	{
+
+	public static void deleteEvents(Event event) {
+		
 		builder = new StringBuilder();
 		builder.append("delte from tbl_Events where et_EventID = ");
 		builder.append(event.getEventID());
 		builder.append(";");
-		
+
 		sendSQL(builder.toString());
 	}
-	
-	///////////////////   EventDaten   ///////////////////
-	
-	public static ArrayList<EventDaten> getAllEventDaten()
-	{
-		ArrayList<EventDaten> eventDatenList = new ArrayList<EventDaten>();
+
+	// ///////////////// EventDaten ///////////////////
+
+	public static ArrayList<EventDaten> getAllEventDaten() {
+		Object obj = readSQL(new SQLReader() {
+			public Object read(ResultSet res) {
+				try 
+				{
+					ArrayList<EventDaten> eventDatenList = new ArrayList<EventDaten>();
+					EventDaten daten = null;
+					
+					while (res.next()) {
+						daten = new EventDaten();
+						
+						daten.setAktTeilnehmer(res.getInt("ed_AktTeilnehmer"));
+						daten.setBeginn(res.getDate("ed_Beginn"));
+						daten.setEnde(res.getDate("ed_Ende"));
+						daten.setEventDatenID(res.getString("ed_EvDatenID"));
+						daten.setEventID(res.getInt("et_EventID"));
+						daten.setFreigegeben(res.getBoolean("ed_Freigegeben"));
+						daten.setMaxTeilnehmer(res.getInt("ed_MaxTeilnehmer"));
+						daten.setPreis(res.getFloat("ed_Preis"));
+						daten.setRabatt(res.getFloat("ed_Rabatt"));
+						daten.setStartOrt(res.getString("ed_StartOrt"));
+						daten.setVeranstalterBenachricht(res.getBoolean("ed_VeranstalterBenachrichtigt"));
+						daten.setZielOrt(res.getString("ed_ZielOrt"));
+						
+						eventDatenList.add(daten);
+					}
+					
+					return eventDatenList;
+				} 
+				catch (Exception ex)
+				{
+					ex.printStackTrace();
+					return null;
+				}
+			}
+		},"select * from tbl_EventDaten");
 		
-		
-		return eventDatenList;
+		return (ArrayList<EventDaten>) obj;
 	}
-	
-	public static void updateEventDaten(EventDaten daten)
-	{
+
+	public static void updateEventDaten(EventDaten daten) {
+		
 		builder = new StringBuilder();
 		builder.append("update tbl_EventDaten set et_EventID = '");
 		builder.append(daten.getEventID());
@@ -316,12 +485,12 @@ public class DataAccess
 		builder.append("' WHERE ed_EvDatenID =");
 		builder.append(daten.getEventDatenID());
 		builder.append(";");
-		
+
 		sendSQL(builder.toString());
 	}
-	
-	public static void insertEventDaten(EventDaten daten)
-	{
+
+	public static void insertEventDaten(EventDaten daten) {
+		
 		builder = new StringBuilder();
 		builder.append("insert into tbl_EventDaten (et_EventID,ed_Preis,ed_Beginn,ed_Ende,ed_StartOrt,ed_ZielOrt,ed_MaxTeilnehmer,ed_AktTeilnehmer,ed_Freigegeben,ed_Rabatt,ed_VeranstalterBenachrichtigt) VALUES(");
 		builder.append(daten.getEventID());
@@ -346,32 +515,61 @@ public class DataAccess
 		builder.append(",'");
 		builder.append(daten.isVeranstalterBenachricht());
 		builder.append("');");
-		
+
 		sendSQL(builder.toString());
 	}
-	
-	public static void deleteEventDaten(EventDaten daten)
-	{
+
+	public static void deleteEventDaten(EventDaten daten) {
+		
 		builder = new StringBuilder();
 		builder.append("delete from tbl_EventDaten where ed_EvDatenID = ");
 		builder.append(daten.getEventDatenID());
 		builder.append(";");
-		
+
 		sendSQL(builder.toString());
 	}
-	
-	///////////////////   Buchung   ///////////////////
-	
-	public static ArrayList<Buchung> getAllBuchung()
-	{
-		ArrayList<Buchung> buchungList = new ArrayList<Buchung>();
+
+	// ///////////////// Buchung ///////////////////
+
+	public static ArrayList<Buchung> getAllBuchung() {
 		
+		Object obj = readSQL(new SQLReader() {
+			public Object read(ResultSet res) {
+				try 
+				{
+					ArrayList<Buchung> buchungList = new ArrayList<Buchung>();
+					Buchung buchung = null;
+					
+					while (res.next()) {
+						buchung = new Buchung();
+						
+						buchung.setBezahlt(res.getBoolean("bu_Bezahlt"));
+						buchung.setBuchungID(res.getInt("bu_BuchungsID"));
+						buchung.setEventDatenID(res.getInt("ed_EvDatenID"));
+						buchung.setGebuchtePlaetze(res.getInt("bu_GebuchtePlaetze"));
+						buchung.setKundenID(res.getInt("kd_KundenID"));
+						buchung.setRechnungErstellt(res.getBoolean("bu_RechnungErstellt"));
+						buchung.setStoniert(res.getBoolean("bu_Stoniert"));
+						
+						buchungList.add(buchung);
+					}
+
+					return buchungList;
+				} 
+				catch (Exception ex)
+				{
+					ex.printStackTrace();
+					return null;
+				}
+			}
+		},"select * from tbl_Buchungen");
 		
-		return buchungList;
+		return (ArrayList<Buchung>) obj;
+		
 	}
-	
-	public static void updateBuchung(Buchung buchung)
-	{
+
+	public static void updateBuchung(Buchung buchung) {
+		
 		builder = new StringBuilder();
 		builder.append("update tbl_Buchungen set kd_KundenID = ");
 		builder.append(buchung.getKundenID());
@@ -388,12 +586,12 @@ public class DataAccess
 		builder.append("' where bu_BuchungsID =");
 		builder.append(buchung.getBuchungID());
 		builder.append(";");
-		
+
 		sendSQL(builder.toString());
 	}
-	
-	public static void insertBuchung(Buchung buchung)
-	{
+
+	public static void insertBuchung(Buchung buchung) {
+		
 		builder = new StringBuilder();
 		builder.append("insert into tbl_Buchungen(kd_KundenID,ed_EvDatenID,bu_GebuchtePlaetze,bu_Bezahlt,bu_Stoniert,bu_RechnungErstellt) VALUES(");
 		builder.append(buchung.getKundenID());
@@ -408,17 +606,17 @@ public class DataAccess
 		builder.append("','");
 		builder.append(buchung.isRechnungErstellt());
 		builder.append("');");
-		
+
 		sendSQL(builder.toString());
 	}
-	
-	public static void deleteBuchung(Buchung buchung)
-	{
+
+	public static void deleteBuchung(Buchung buchung) {
+		
 		builder = new StringBuilder();
 		builder.append("delte from tbl_Buchungen where bu_BuchungsID = ");
 		builder.append(buchung.getBuchungID());
 		builder.append(";");
-		
+
 		sendSQL(builder.toString());
 	}
 

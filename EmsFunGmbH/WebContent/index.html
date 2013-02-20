@@ -1,0 +1,388 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+	<html>
+
+		<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+		<title>Eventmanagementsystem</title>
+		<script type="text/javascript" src="js/custom.js"></script>
+		<link rel="stylesheet" type="text/css" href="css/style.css">
+		<script type="text/javascript" src="jquery-ui-1.9.1.custom/js/jquery-1.8.2.js"></script>
+		<script type="text/javascript" src="jquery-ui-1.9.1.custom/js/jquery-ui-1.9.1.custom.js"></script>
+		<script type="text/javascript" src="jquery-ui-1.9.1.custom/js/jquery-ui-1.9.1.custom.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="jquery-ui-1.9.1.custom/css/smoothness/jquery-ui-1.9.1.custom.css">
+		</head>
+			<body onload="custom();">
+		
+				<div class="out">
+					<div class="header">Eventmanagementsystem<img src="images/logo.jpg" id="logo"></div>
+			
+						<div class="main">
+							<div id="tabs">
+								<ul>
+									<li><a href="#tab-1">Event</a></li>
+									<li><a href="#tab-2">Kategorien</a></li>
+									<li><a href="#tab-3">Eventveranstalter</a></li>
+								</ul>
+
+								<div id="tab-1">
+									<br>
+									<div class="overview">
+									Events
+									<button class="add" id="Add">+ Add Event</button>
+									</div>
+									<br>
+									<div class="scroll">	
+										<table id="Eventtable">
+											<tr>
+												<th style="border:1px solid purple">Bezeichnung</th>
+												<th style="border:1px solid purple">Beschreibung</th>
+												<th style="width: 8%;"></th>
+											</tr>
+											<tr>
+												<td><input type="text" class="input" id="zeile1feld1"></td>
+												<td><input type="text" class="input" id="zeile1feld2"></td>
+												<td><input type="button" class="zeile1feld1 zeile1feld2" value="Edit" id="editEvent"></td>
+											</tr>
+											<tr>
+												<td><input type="text" class="input"></td>
+												<td><input type="text" class="input"></td>
+												<td><input type="button" class="zeile2feld1 zeile2feld2" value="Edit" id="editEvent2"></td>
+											</tr>
+											<tr>
+												<td><input type="text" class="input"></td>
+												<td><input type="text" class="input"></td>
+												<td><input type="button" class="zeile3feld1 zeile3feld2" value="Edit" id="editEvent3"></td>
+											</tr>
+											<tr>
+												<td><input type="text" class="input"></td>
+												<td><input type="text" class="input"></td>
+												<td><input type="button" class="zeile4feld1 zeile4feld2" value="Edit" id="editEvent4"></td>
+											</tr>
+											<tr>
+												<td><input type="text" class="input"></td>
+												<td><input type="text" class="input"></td>
+												<td><input type="button" class="zeile5feld1 zeile5feld2" value="Edit" id="editEvent5"></td>
+											</tr>
+										</table></div>
+									<br>
+									<div class="overview">
+									Eventdaten
+									<button class="add" id="AddEV">+ Add Eventdaten</button>
+									</div>
+									<br>
+										<div class="scroll"><table id="Eventdatentable">
+										<tr>
+											<th style="border:1px solid purple">Preis</th>
+											<th style="border:1px solid purple">Beginn</th>
+											<th style="border:1px solid purple">Ende</th>
+											<th style="border:1px solid purple">Startort</th>
+											<th style="border:1px solid purple">Zielort</th>
+											<th style="border:1px solid purple">Max. Teiln.</th>
+											<th style="border:1px solid purple">Akt. Teiln.</th>
+											<th style="border:1px solid purple">Freigegeben</th>
+											<th style="border:1px solid purple">Rabatt</th>
+											<th style="border:1px solid purple">Veranst. benachrichtigt</th>
+											<th style="width:8%;"></th>
+										</tr>
+										<tr>
+											<td><input type="text" id="evdzeile1spalte1"></td>
+											<td><input type="text" id="evdzeile1spalte2"></td>
+											<td><input type="text" id="evdzeile1spalte3"></td>
+											<td><input type="text" id="evdzeile1spalte4"></td>
+											<td><input type="text" id="evdzeile1spalte5"></td>
+											<td><input type="text" id="evdzeile1spalte6"></td>
+											<td><input type="text" id="evdzeile1spalte7"></td>
+											<td><input type="text" id="evdzeile1spalte8"></td>
+											<td><input type="text" id="evdzeile1spalte8"></td>
+											<td><input type="text" id="evdzeile1spalte10"></td>
+											<td><input type="button" class="evdzeile1spalte1 evdzeile1spalte2 evdzeile1spalte3 evdzeile1spalte4 evdzeile1spalte5 evdzeile1spalte6 evdzeile1spalte7 evdzeile1spalte8 evdzeile1spalte9 evdzeile1spalte10" value="Edit" id="editEV"></td>
+										<tr>
+										</tr>
+										<tr>
+											<td><input type="text" id="evdzeile1spalte1"></td>
+											<td><input type="text" id="evdzeile1spalte2"></td>
+											<td><input type="text" id="evdzeile1spalte3"></td>
+											<td><input type="text" id="evdzeile1spalte4"></td>
+											<td><input type="text" id="evdzeile1spalte5"></td>
+											<td><input type="text" id="evdzeile1spalte6"></td>
+											<td><input type="text" id="evdzeile1spalte7"></td>
+											<td><input type="text" id="evdzeile1spalte8"></td>
+											<td><input type="text" id="evdzeile1spalte9"></td>
+											<td><input type="text" id="evdzeile1spalte10"></td>
+											<td><input type="button" class="evdzeile2spalte1 evdzeile2spalte2 evdzeile2spalte3 evdzeile2spalte4 evdzeile2spalte5 evdzeile2spalte6 evdzeile2spalte7 evdzeile2spalte8 evdzeile2spalte9 evdzeile2spalte10" value="Edit" id="editEV2"></td>
+										</tr>
+										<tr>
+											<td><input type="text" id="evdzeile2spalte1"></td>
+											<td><input type="text" id="evdzeile2spalte2"></td>
+											<td><input type="text" id="evdzeile2spalte3"></td>
+											<td><input type="text" id="evdzeile2spalte4"></td>
+											<td><input type="text" id="evdzeile2spalte5"></td>
+											<td><input type="text" id="evdzeile2spalte6"></td>
+											<td><input type="text" id="evdzeile2spalte7"></td>
+											<td><input type="text" id="evdzeile2spalte8"></td>
+											<td><input type="text" id="evdzeile2spalte9"></td>
+											<td><input type="text" id="evdzeile2spalte10"></td>
+											<td><input type="button" class="evdzeile3spalte1 evdzeile3spalte2 evdzeile3spalte3 evdzeile3spalte4 evdzeile3spalte5 evdzeile3spalte6 evdzeile3spalte7 evdzeile3spalte8 evdzeile3spalte9 evdzeile3spalte10" value="Edit" id="editEV3"></td>
+										</tr>
+										<tr>
+											<td><input type="text" id="evdzeile4spalte1"></td>
+											<td><input type="text" id="evdzeile4spalte2"></td>
+											<td><input type="text" id="evdzeile4spalte3"></td>
+											<td><input type="text" id="evdzeile4spalte4"></td>
+											<td><input type="text" id="evdzeile4spalte5"></td>
+											<td><input type="text" id="evdzeile4spalte6"></td>
+											<td><input type="text" id="evdzeile4spalte7"></td>
+											<td><input type="text" id="evdzeile4spalte8"></td>
+											<td><input type="text" id="evdzeile4spalte9"></td>
+											<td><input type="text" id="evdzeile4spalte10"></td>
+											<td><input type="button" class="evdzeile4spalte1 evdzeile4spalte2 evdzeile4spalte3 evdzeile4spalte4 evdzeile4spalte5 evdzeile4spalte6 evdzeile4spalte7 evdzeile4spalte8 evdzeile4spalte9 evdzeile4spalte10" value="Edit" id="editEV4"></td>
+										</tr>
+										<tr>
+											<td><input type="text" id="evdzeile5spalte1"></td>
+											<td><input type="text" id="evdzeile5spalte2"></td>
+											<td><input type="text" id="evdzeile5spalte3"></td>
+											<td><input type="text" id="evdzeile5spalte4"></td>
+											<td><input type="text" id="evdzeile5spalte5"></td>
+											<td><input type="text" id="evdzeile5spalte6"></td>
+											<td><input type="text" id="evdzeile5spalte7"></td>
+											<td><input type="text" id="evdzeile5spalte8"></td>
+											<td><input type="text" id="evdzeile5spalte9"></td>
+											<td><input type="text" id="evdzeile5spalte10"></td>
+											<td><input type="button" class="evdzeile5spalte1 evdzeile5spalte2 evdzeile5spalte3 evdzeile5spalte4 evdzeile5spalte5 evdzeile5spalte6 evdzeile5spalte7 evdzeile5spalte8 evdzeile5spalte9 evdzeile5spalte10" value="Edit" id="editEV5"></td>
+										</tr>
+										
+										
+									</table></div>
+									
+								</div>
+								<div id="tab-2">
+								<br>
+									<div class="overview">
+									Kategorien
+									<button class="add" id="AddK">+ Add Kategorie</button>
+									</div>
+								<br>
+									<table id="Kategorientable">
+										<tr>
+											<th style="border:1px solid purple">Katbezeichnung</th>
+											<th style="border:1px solid purple">EvKategorieID</th>
+											<th></th>
+										</tr>
+										<tr>
+											<td><input type="text" id="ekzeile1spalte1"></td>
+											<td><input type="text" id="ekzeile1spalte2"></td>
+											<td><input type="button" class="ekzeile1spalte1 ekzeile1spalte2" value="Edit" id="editK"></td>
+										</tr>
+										<tr>
+											<td><input type="text" id="ekzeile2spalte1"></td>
+											<td><input type="text" id="ekzeile2spalte2"></td>
+											<td><input type="button" class="ekzeile2spalte1 ekzeile2spalte2" value="Edit" id="editK2"></td>
+										</tr>
+										<tr>
+											<td><input type="text" id="ekzeile3spalte1"></td>
+											<td><input type="text" id="ekzeile3spalte2"></td>
+											<td><input type="button" class="ekzeile3spalte1 ekzeile3spalte2" value="Edit" id="editK3"></td>
+										</tr>
+										<tr>
+											<td><input type="text" id="ekzeile4spalte1"></td>
+											<td><input type="text" id="ekzeile4spalte2"></td>
+											<td><input type="button" class="ekzeile4spalte1 ekzeile4spalte2" value="Edit" id="editK4"></td>
+										</tr>
+										<tr>
+											<td><input type="text" id="ekzeile5spalte1"></td>
+											<td><input type="text" id="ekzeile5spalte2"></td>
+											<td><input type="button" class="ekzeile5spalte1 ekzeile5spalte2" value="Edit" id="editK5"></td>
+										</tr>
+									</table>
+								</div>
+								<div id="tab-3">
+									<br>
+									<div class="overview">
+										Eventveranstalter
+										<button class="add" id="AddEVV">+ Add Eventveranstalter</button>
+									</div>
+									<br>
+									<table id="Eventveranstaltertable">
+										<tr>
+											<th style="border:1px solid purple">Firma</th>
+											<th style="border:1px solid purple">Strasse</th>
+											<th style="border:1px solid purple">PLZ</th>
+											<th style="border:1px solid purple">Hnummer</th>
+											<th style="border:1px solid purple">Ort</th>
+											<th style="border:1px solid purple">Telefon</th>
+											<th style="border:1px solid purple">Email</th>
+											<th style="border:1px solid purple">Fax</th>
+											<th style="width: 5%;"></th>
+										</tr>
+										<tr>
+											<td><input type="text" id="evvzeile1spalte1"></td>
+											<td><input type="text" id="evvzeile1spalte2"></td>
+											<td><input type="text" id="evvzeile1spalte3"></td>
+											<td><input type="text" id="evvzeile1spalte4"></td>
+											<td><input type="text" id="evvzeile1spalte5"></td>
+											<td><input type="text" id="evvzeile1spalte6"></td>
+											<td><input type="text" id="evvzeile1spalte7"></td>
+											<td><input type="text" id="evvzeile1spalte8"></td>
+											<td><input type="button" class="evvzeile1spalte1 evvzeile1spalte2 evvzeile1spalte3 evvzeile1spalte4 evvzeile1spalte5 evvzeile1spalte6 evvzeile1spalte7 evvzeile1spalte8" value="Edit" id="editEVV"></td>
+										</tr>
+										<tr>
+											<td><input type="text" id="evvzeile2spalte1"></td>
+											<td><input type="text" id="evvzeile2spalte2"></td>
+											<td><input type="text" id="evvzeile2spalte3"></td>
+											<td><input type="text" id="evvzeile2spalte4"></td>
+											<td><input type="text" id="evvzeile2spalte5"></td>
+											<td><input type="text" id="evvzeile2spalte6"></td>
+											<td><input type="text" id="evvzeile2spalte7"></td>
+											<td><input type="text" id="evvzeile2spalte8"></td>
+											<td><input type="button" class="evvzeile2spalte1 evvzeile2spalte2 evvzeile2spalte3 evvzeile2spalte4 evvzeile2spalte5 evvzeile2spalte6 evvzeile2spalte7 evvzeile2spalte8" value="Edit" id="editEVV2"></td>
+										</tr>
+										<tr>
+											<td><input type="text" id="evvzeile3spalte1"></td>
+											<td><input type="text" id="evvzeile3spalte2"></td>
+											<td><input type="text" id="evvzeile3spalte3"></td>
+											<td><input type="text" id="evvzeile3spalte4"></td>
+											<td><input type="text" id="evvzeile3spalte5"></td>
+											<td><input type="text" id="evvzeile3spalte6"></td>
+											<td><input type="text" id="evvzeile3spalte7"></td>
+											<td><input type="text" id="evvzeile3spalte8"></td>
+											<td><input type="button" class="evvzeile3spalte1 evvzeile3spalte2 evvzeile3spalte3 evvzeile3spalte4 evvzeile3spalte5 evvzeile3spalte6 evvzeile3spalte7 evvzeile3spalte8" value="Edit" id="editEVV3"></td>
+										</tr>
+										<tr>
+											<td><input type="text" id="evvzeile4spalte1"></td>
+											<td><input type="text" id="evvzeile4spalte2"></td>
+											<td><input type="text" id="evvzeile4spalte3"></td>
+											<td><input type="text" id="evvzeile4spalte4"></td>
+											<td><input type="text" id="evvzeile4spalte5"></td>
+											<td><input type="text" id="evvzeile4spalte6"></td>
+											<td><input type="text" id="evvzeile4spalte7"></td>
+											<td><input type="text" id="evvzeile4spalte8"></td>
+											<td><input type="button" class="evvzeile4spalte1 evvzeile4spalte2 evvzeile4spalte3 evvzeile4spalte4 evvzeile4spalte5 evvzeile4spalte6 evvzeile4spalte7 evvzeile4spalte8" value="Edit" id="editEVV4"></td>
+										</tr>
+										<tr>
+											<td><input type="text" id="evvzeile5spalte1"></td>
+											<td><input type="text" id="evvzeile5spalte2"></td>
+											<td><input type="text" id="evvzeile5spalte3"></td>
+											<td><input type="text" id="evvzeile5spalte4"></td>
+											<td><input type="text" id="evvzeile5spalte5"></td>
+											<td><input type="text" id="evvzeile5spalte6"></td>
+											<td><input type="text" id="evvzeile5spalte7"></td>
+											<td><input type="text" id="evvzeile5spalte8"></td>
+											<td><input type="button" class="evvzeile5spalte1 evvzeile5spalte2 evvzeile5spalte3 evvzeile5spalte4 evvzeile5spalte5 evvzeile5spalte6 evvzeile5spalte7 evvzeile5spalte8" value="Edit" id="editEVV5"></td>
+										</tr>
+									</table>
+									
+								</div>
+							</div>
+							
+						</div>
+						
+					<div class="footer">Designed by Markus Zinngisser und Michael Brandhuber</div>
+				</div>
+				<div id="dialog" title="Event eintragen">
+						<p>
+							<table>
+								<tr><td style="width: 50%">EventID:</td><td><input type="text" name="Name" id="evid"></td></tr>
+								<tr><td>Bezeichnung:</td><td><input type="text" name="Name" id="bez"></td></tr>
+								<tr><td>Beschreibung:</td><td><input type="text" name="Name" id="bes"></td></tr>
+							</table>
+						</p>
+				</div>
+				<div id="editdialog" title="Event bearbeiten">
+						<p>
+							<table>
+								<tr><td style="width: 50%">EventID:</td><td><input type="text" name="Name" id="evid"></td></tr>
+								<tr><td>Bezeichnung:</td><td><input type="text" name="Name" id="bez"></td></tr>
+								<tr><td>Beschreibung:</td><td><input type="text" name="Name" id="bes"></td></tr>
+							</table>
+						</p>
+				</div>
+				
+				
+						<div id="dialog2" title="Eventdaten eintragen">
+							<p>
+								<table>
+									<tr><td style="width: 50%">EvDatenID:</td><td><input type="text" name="Name" id="evdid"></td></tr>
+									<tr><td>Preis:</td><td><input type="text" name="Name" id="preis"></td></tr>
+									<tr><td>Beginn:</td><td><input type="text" name="Name" id="beginn"></td></tr>
+									<tr><td>Ende:</td><td><input type="text" name="Name" id="ende"></td></tr>
+									<tr><td>StartOrt:</td><td><input type="text" name="Name" id="sort"></td></tr>
+									<tr><td>ZielOrt:</td><td><input type="text" name="Name" id="zort"></td></tr>
+									<tr><td>MaxTeilnehmer:</td><td><input type="text" name="Name" id="mteilnehmer"></td></tr>
+									<tr><td>AktTeilnehmer:</td><td><input type="text" name="Name" id="ateilnehmer"></td></tr>
+									<tr><td>Freigegeben:</td><td><input type="text" name="Name" id="frei"></td></tr>
+									<tr><td>Rabatt:</td><td><input type="text" name="Name" id="rabatt"></td></tr>
+									<tr><td>VeranstalterBenachrichtigt:</td><td><input type="text" name="Name" id="vbenachrichtigt"></td></tr>
+								</table>
+							</p>
+						</div>
+						
+						
+						<div id="editdialog2" title="Eventdaten bearbeiten">
+							<p>
+								<table>
+									<tr><td style="width: 50%">EvDatenID:</td><td><input type="text" name="Name" id="evdid"></td></tr>
+									<tr><td>Preis:</td><td><input type="text" name="Name" id="preis"></td></tr>
+									<tr><td>Beginn:</td><td><input type="text" name="Name" id="beginn"></td></tr>
+									<tr><td>Ende:</td><td><input type="text" name="Name" id="ende"></td></tr>
+									<tr><td>StartOrt:</td><td><input type="text" name="Name" id="sort"></td></tr>
+									<tr><td>ZielOrt:</td><td><input type="text" name="Name" id="zort"></td></tr>
+									<tr><td>MaxTeilnehmer:</td><td><input type="text" name="Name" id="mteilnehmer"></td></tr>
+									<tr><td>AktTeilnehmer:</td><td><input type="text" name="Name" id="ateilnehmer"></td></tr>
+									<tr><td>Freigegeben:</td><td><input type="text" name="Name" id="frei"></td></tr>
+									<tr><td>Rabatt:</td><td><input type="text" name="Name" id="rabatt"></td></tr>
+									<tr><td>VeranstalterBenachrichtigt:</td><td><input type="text" name="Name" id="vbenachrichtigt"></td></tr>
+								</table>
+							</p>
+						</div>
+							<div id="dialog3" title="Kategorien eintragen">
+								<p>
+									<table>
+										<tr><td style="width: 50%">EvKategorieID:</td><td><input type="text" id="evKid"></td></tr>
+										<tr><td>KatBezeichnung:</td><td><input type="text" id="kbez"></td></tr>
+										<tr><td>EvKategorieID:</td><td><input type="text" id="evkat"></td></tr>
+										
+									</table>
+								</p>
+							</div>
+							<div id="editdialog3" title="Kategorien bearbeiten">
+								<p>
+									<table>
+										<tr><td style="width: 50%">EvKategorieID:</td><td><input type="text" id="evKid"></td></tr>
+										<tr><td>KatBezeichnung:</td><td><input type="text" id="kbez"></td></tr>
+										<tr><td>EvKategorieID:</td><td><input type="text" id="evkat"></td></tr>
+									</table>
+								</p>
+							</div>
+								<div id="dialog4" title="Eventveranstalter eintragen">
+									<p>
+										<table>
+											<tr><td style="width: 50%">EvVeranstalterID:</td><td><input type="text" name="Name" id="evvId"></td></tr>
+											<tr><td>Firma:</td><td><input type="text" name="Name" id="firma"></td></tr>
+											<tr><td>Strasse:</td><td><input type="text" name="Name" id="strasse"></td></tr>
+											<tr><td>PLZ:</td><td><input type="text" name="Name" id="plz"></td></tr>
+											<tr><td>HNummer:</td><td><input type="text" name="Name" id="hnummer"></td></tr>
+											<tr><td>Ort:</td><td><input type="text" name="Name" id="ort"></td></tr>
+											<tr><td>Telefon:</td><td><input type="text" name="Name" id="tel"></td></tr>
+											<tr><td>EMail:</td><td><input type="text" name="Name" id="mail"></td></tr>
+											<tr><td>Fax:</td><td><input type="text" name="Name" id="fax"></td></tr>
+										</table>
+									</p>
+								</div>
+								<div id="editdialog4" title="Eventveranstalter bearbeiten">
+									<p>
+										<table>
+											<tr><td style="width: 50%">EvVeranstalterID:</td><td><input type="text" name="Name" id="evvId"></td></tr>
+											<tr><td>Firma:</td><td><input type="text" name="Name" id="firma"></td></tr>
+											<tr><td>Strasse:</td><td><input type="text" name="Name" id="strasse"></td></tr>
+											<tr><td>PLZ:</td><td><input type="text" name="Name" id="plz"></td></tr>
+											<tr><td>HNummer:</td><td><input type="text" name="Name" id="hnummer"></td></tr>
+											<tr><td>Ort:</td><td><input type="text" name="Name" id="ort"></td></tr>
+											<tr><td>Telefon:</td><td><input type="text" name="Name" id="tel"></td></tr>
+											<tr><td>EMail:</td><td><input type="text" name="Name" id="mail"></td></tr>
+											<tr><td>Fax:</td><td><input type="text" name="Name" id="fax"></td></tr>
+										</table>
+									</p>
+								</div>
+			</body>
+
+	</html>
