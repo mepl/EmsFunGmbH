@@ -13,9 +13,9 @@ public class EventDaten
 	private String _zielOrt;
 	private int _maxTeilnehmer;
 	private int _aktTeilnehmer;
-	private boolean _freigegeben;
+	private int _freigegeben;
 	private float _rabatt;
-	private boolean _veranstalterBenachricht;
+	private int _veranstalterBenachricht;
 	
 	public String getEventDatenID() 
 	{
@@ -89,11 +89,11 @@ public class EventDaten
 	{
 		this._aktTeilnehmer = _aktTeilnehmer;
 	}
-	public boolean isFreigegeben() 
+	public int isFreigegeben() 
 	{
 		return _freigegeben;
 	}
-	public void setFreigegeben(boolean _freigegeben) 
+	public void setFreigegeben(int _freigegeben) 
 	{
 		this._freigegeben = _freigegeben;
 	}
@@ -105,11 +105,11 @@ public class EventDaten
 	{
 		this._rabatt = _rabatt;
 	}
-	public boolean isVeranstalterBenachricht() 
+	public int isVeranstalterBenachricht() 
 	{
 		return _veranstalterBenachricht;
 	}
-	public void setVeranstalterBenachricht(boolean _veranstalterBenachricht) 
+	public void setVeranstalterBenachricht(int _veranstalterBenachricht) 
 	{
 		this._veranstalterBenachricht = _veranstalterBenachricht;
 	}

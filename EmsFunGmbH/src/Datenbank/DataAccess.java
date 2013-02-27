@@ -433,12 +433,12 @@ public class DataAccess {
 						daten.setEnde(res.getDate("ed_Ende"));
 						daten.setEventDatenID(res.getString("ed_EvDatenID"));
 						daten.setEventID(res.getInt("et_EventID"));
-						daten.setFreigegeben(res.getBoolean("ed_Freigegeben"));
+						daten.setFreigegeben(res.getInt("ed_Freigegeben"));
 						daten.setMaxTeilnehmer(res.getInt("ed_MaxTeilnehmer"));
 						daten.setPreis(res.getFloat("ed_Preis"));
 						daten.setRabatt(res.getFloat("ed_Rabatt"));
 						daten.setStartOrt(res.getString("ed_StartOrt"));
-						daten.setVeranstalterBenachricht(res.getBoolean("ed_VeranstalterBenachrichtigt"));
+						daten.setVeranstalterBenachricht(res.getInt("ed_VeranstalterBenachrichtigt"));
 						daten.setZielOrt(res.getString("ed_ZielOrt"));
 						
 						eventDatenList.add(daten);

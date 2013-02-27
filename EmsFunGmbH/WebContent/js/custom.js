@@ -8,7 +8,7 @@ custom=function(){
 
 		 
 //Erstellen jquery Dialog
-
+// Events
 		$("#dialog").dialog({
     	bgiframe: true,
     	autoOpen: false,
@@ -16,8 +16,14 @@ custom=function(){
     	
     	buttons: {
     		OK: function() {
-    	              //$("#editdialog > form").submit();
-    		  $(this).dialog('close');
+    				$.ajax({
+    					type:"GET",
+    					url:"http://localhost:8080/EmsFunGmbH/EventServlet",
+    					data: "bez=" + $("#bez").val() + "&bes=" + $("#bes").val() + "&kat="+ $("#kat").val() + "&ver=" + $("#ver").val(),
+    					success: function(data){window.location.replace("index.jsp");},
+    					error: function(){alert('Fehler');}
+    				});
+    		
     		},
     		Abbrechen: function() {
     			$(this).dialog('close');
@@ -29,7 +35,8 @@ custom=function(){
     });
 
 //Erstellen jquery Dialog2
-
+// Eventdaten
+    
 $("#dialog2").dialog({
     	bgiframe: true,
     	autoOpen: false,
@@ -37,8 +44,13 @@ $("#dialog2").dialog({
     	
     	buttons: {
     		OK: function() {
-    	              //$("#editdialog > form").submit();
-    		  $(this).dialog('close');
+    			$.ajax({
+					type:"POST",
+					url:"http://localhost:8080/EmsFunGmbH/EventDatenServlet",
+					data: "preis=" + $("#preis").val() + "&beginn=" + $("#beginn").val() + "&ende="+ $("#ende").val() + "&sort=" + $("#sort").val()+ "&zort=" + $("#zort").val()+ "&mteilnehmer=" + $("#mteilnehmer").val()+ "&ateilnehmer=" + $("#ateilnehmer").val()+ "&frei=" + $("#frei").is(":checked")+ "&rabatt=" + $("#rabatt").val()+ "&vbenachrichtigt=" + $("#vbenachrichtigt").is(":checked"),
+					success: function(data){window.location.replace("index.jsp");}
+					
+				});
     		},
     		Abbrechen: function() {
     			$(this).dialog('close');
@@ -50,7 +62,7 @@ $("#dialog2").dialog({
     });
 
 //Erstellen jquery Dialog3
-				
+// Kategorien		
 		$("#dialog3").dialog({
     	bgiframe: true,
     	autoOpen: false,
@@ -58,8 +70,13 @@ $("#dialog2").dialog({
     	
     	buttons: {
     		OK: function() {
-    	              //$("#editdialog > form").submit();
-    		  $(this).dialog('close');
+    			$.ajax({
+					type:"GET",
+					url:"http://localhost:8080/EmsFunGmbH/EventKategorieServlet",
+					data: "kbez=" + $("#kbez").val(),
+					success: function(data){alert("Success");},
+    				error: function(data){window.location = "http://localhost:8080/EmsFunGmbH/index.jsp";}
+				});
     		},
     		Abbrechen: function() {
     			$(this).dialog('close');
@@ -324,7 +341,7 @@ $("#dialog2").dialog({
     });
 	
 	
-	
+	$(".datepicker").datepicker({dateFormat: 'dd.mm.yy'});
 	
 	
 	
