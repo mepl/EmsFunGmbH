@@ -39,15 +39,15 @@ public class EventServlet extends HttpServlet {
     	for(int i = 0; i < events.size();i++)
     	{
     		event = events.get(i);
-        	builder.append("<tr>");
-    		builder.append("<td>");
+        	builder.append("<tr><td>");
+        	builder.append(event.getEventVeranstalterID());
+    		builder.append("</td><td>");
+    		builder.append(event.getEventKategorieID());
+    		builder.append("</td><td>");
     		builder.append(event.getBezeichnung());
-    		builder.append("</td>");
-    		builder.append("<td>");
+    		builder.append("</td><td>");
     		builder.append(event.getBeschreibung());
-    		builder.append("</td>");
-    		builder.append("<td><input type=\"button\" value=\"Ändern\" id=\"editEvent" + i + "\"></td>");
-        	builder.append("</tr>");
+    		builder.append("</td><td><input type=\"button\" value=\"Ändern\" id=\"editEvent\"></td></tr>");
     	}
     	
     	return builder.toString();
@@ -92,7 +92,6 @@ public class EventServlet extends HttpServlet {
     	event.setEventKategorieID(Integer.parseInt(req.getParameter("kat")));
     	event.setEventVeranstalterID(Integer.parseInt(req.getParameter("ver")));
     	DataAccess.insertEvents(event);
-    	req.setAttribute("data", "index.jsp");
 //    	req.setAttribute("data", "index.jsp");
 //    	RequestDispatcher rd = req.getRequestDispatcher("index.jsp");
 //    	rd.forward(req, resp);

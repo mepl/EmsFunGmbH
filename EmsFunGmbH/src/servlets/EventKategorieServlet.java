@@ -35,7 +35,7 @@ public class EventKategorieServlet extends HttpServlet
     		builder.append("<td>");
     		builder.append(kategorie.getBezeichnung());
     		builder.append("</td>");
-    		builder.append("<td><input type=\"button\" value=\"Ändern\" id=\"editEvent" + i + "\"></td>");
+    		builder.append("<td><input type=\"button\" value=\"Ändern\" id=\"editK\"></td>");
         	builder.append("</tr>");
     	}
     	

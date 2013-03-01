@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import Datenbank.DataAccess;
 import Objects.Event;
 import Objects.EventDaten;
+import Objects.EventKategorie;
 
 @WebServlet("/EventDatenServlet")
 public class EventDatenServlet extends HttpServlet 
@@ -34,8 +35,9 @@ public class EventDatenServlet extends HttpServlet
     	for(int i = 0; i < events.size();i++)
     	{
     		eventdaten = events.get(i);
-        	builder.append("<tr>");
-    		builder.append("<td>");
+    		builder.append("<tr><td>");
+    		builder.append(eventdaten.getEventID());
+        	builder.append("</td><td>");
     		builder.append(eventdaten.getPreis());
     		builder.append("</td><td>");
     		builder.append(eventdaten.getBeginn());
@@ -55,9 +57,22 @@ public class EventDatenServlet extends HttpServlet
     		builder.append(eventdaten.getRabatt());
     		builder.append("</td><td>");
     		builder.append(eventdaten.isVeranstalterBenachricht());
-    		builder.append("/td");
-    		builder.append("<td><input type=\"button\" value=\"Ändern\" id=\"editEvent" + i + "\"></td>");
-        	builder.append("</tr>");
+    		builder.append("</td><td><input type=\"button\" value=\"Ändern\" id=\"editEvent" + i + "\"></td></tr>");
+    	}
+    	
+    	return builder.toString();
+    }
+    
+    public String getEvents()
+    {
+    	ArrayList<Event> eventList = DataAccess.getAllEvents();
+    	StringBuilder builder = new StringBuilder();
+    	
+    	for(int i = 0; i < eventList.size(); i++)
+    	{
+    		builder.append("<option>");
+    		builder.append(eventList.get(i).getEventID());
+    		builder.append("</option>");
     	}
     	
     	return builder.toString();
@@ -77,7 +92,7 @@ public class EventDatenServlet extends HttpServlet
     	if(strende == null || strbeginn == null || strpreis== null || strmaxT == null || straktT == null || strrabatt == null)
     	{
     		// Success = false !!!
-    		// Eingabe pflicht
+    		// Eingabe pflicht    resp.sendError(arg0)
     	}
     	// Prüfung auf Integer ..
     	
@@ -113,9 +128,6 @@ public class EventDatenServlet extends HttpServlet
     	eventdaten.setRabatt(rabatt);
     	eventdaten.setVeranstalterBenachricht(Integer.parseInt(req.getParameter("vbenachrichtigt")));
     	DataAccess.insertEventDaten(eventdaten);
-    	req.setAttribute("data", "index.jsp");
-//    	RequestDispatcher rd = req.getRequestDispatcher("index.jsp");
-//    	rd.forward(req, resp);
     }
 
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)

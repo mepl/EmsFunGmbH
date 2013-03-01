@@ -19,10 +19,11 @@ custom=function(){
     				$.ajax({
     					type:"GET",
     					url:"http://localhost:8080/EmsFunGmbH/EventServlet",
-    					data: "bez=" + $("#bez").val() + "&bes=" + $("#bes").val() + "&kat="+ $("#kat").val() + "&ver=" + $("#ver").val(),
-    					success: function(data){window.location.replace("index.jsp");},
-    					error: function(){alert('Fehler');}
-    				});
+    					data: "bez=" + $("#bez").val() + "&bes=" + $("#bes").val() + "&kat="+ $("#kat").val() + "&ver=" + $("#ver").val()
+//    					onsuccess: function(data) {window.location = "http://localhost:8080/EmsFunGmbH/index.jsp";},
+//    					success: function(data){window.location = "http://localhost:8080/EmsFunGmbH/index.jsp";},
+//    					error: function(data){alert(data);}
+    				}).done(function(){alert("success");}).fail(function(){alert("Fail");});
     		
     		},
     		Abbrechen: function() {
@@ -74,7 +75,7 @@ $("#dialog2").dialog({
 					type:"GET",
 					url:"http://localhost:8080/EmsFunGmbH/EventKategorieServlet",
 					data: "kbez=" + $("#kbez").val(),
-					success: function(data){alert("Success");},
+					success: function(data){},
     				error: function(data){window.location = "http://localhost:8080/EmsFunGmbH/index.jsp";}
 				});
     		},
@@ -87,7 +88,8 @@ $("#dialog2").dialog({
     	$('#dialog3').dialog('open');
     });
 				
-//Erstellen jquery Dialog4
+//Erstellen jquery Dialog
+// Eventveranstalter
 		$("#dialog4").dialog({
     	bgiframe: true,
     	autoOpen: false,
@@ -95,8 +97,13 @@ $("#dialog2").dialog({
     	
     	buttons: {
     		OK: function() {
-    	              //$("#editdialog > form").submit();
-    		  $(this).dialog('close');
+    			$.ajax({
+					type:"GET",
+					url:"http://localhost:8080/EmsFunGmbH/EventVeranstalterServlet",
+					data: "firma=" + $("#firma").val() + "&strasse=" + $("#strasse").val() + "&plz=" + $("#plz").val()+ "&hnummer=" + $("#hnummer").val()+ "&ort=" + $("#ort").val()+ "&tel=" + $("#tel").val()+ "&mail=" + $("#mail").val()+ "&fax=" + $("#fax").val(),
+					success: function(data){alert("Success");},
+    				error: function(data){window.location = "http://localhost:8080/EmsFunGmbH/index.jsp";}
+				});
     		},
     		Abbrechen: function() {
     			$(this).dialog('close');

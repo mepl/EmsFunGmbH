@@ -201,7 +201,8 @@ public class DataAccess {
 						veranstalter.setOrt(res.getString("ev_Ort"));
 						veranstalter.setTelefon(res.getString("ev_Telefon"));
 						veranstalter.setEmail(res.getString("ev_EMail"));
-
+						veranstalter.setFax(res.getString("ev_Fax"));
+						
 						veranstalterList.add(veranstalter);
 					}
 

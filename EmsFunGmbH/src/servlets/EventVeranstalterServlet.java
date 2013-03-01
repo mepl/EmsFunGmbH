@@ -1,11 +1,16 @@
 package servlets;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import Datenbank.DataAccess;
+import Objects.Event;
 import Objects.EventKategorie;
 import Objects.EventVeranstalter;
 
@@ -51,4 +56,25 @@ public class EventVeranstalterServlet extends HttpServlet
     	
     	return builder.toString();
     }
+
+
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp)throws ServletException, IOException {
+    	super.doPost(req, resp);
+    	
+    	EventVeranstalter eventVeranstalter = new EventVeranstalter();
+    	eventVeranstalter.setFirma(req.getParameter("firma"));
+    	eventVeranstalter.setStrasse(req.getParameter("strasse"));
+    	eventVeranstalter.setPlz(req.getParameter("plz"));
+    	eventVeranstalter.setHausNummer(req.getParameter("hnummer"));
+    	eventVeranstalter.setOrt(req.getParameter("ort"));
+    	eventVeranstalter.setTelefon(req.getParameter("tel"));
+    	eventVeranstalter.setEmail(req.getParameter("mail"));
+    	eventVeranstalter.setFax(req.getParameter("fax"));
+    	DataAccess.insertEventVeranstalter(eventVeranstalter);
+    }
+    
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+    		throws ServletException, IOException {
+    	doPost(req, resp);
+    }    
 }
