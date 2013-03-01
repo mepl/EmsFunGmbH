@@ -57,7 +57,8 @@ public class EventDatenServlet extends HttpServlet
     		builder.append(eventdaten.getRabatt());
     		builder.append("</td><td>");
     		builder.append(eventdaten.isVeranstalterBenachricht());
-    		builder.append("</td><td><input type=\"button\" value=\"Ändern\" id=\"editEvent" + i + "\"></td></tr>");
+    		builder.append("</td><td><button id=\"editEventDaten" + i + "\" onClick=\"$(this).EditEventDaten();\">Ändern</Button></td></tr>");
+    		//builder.append("</td><td><input type=\"button\" value=\"Ändern\" id=\"editEvent" + i + "\"></td></tr>");
     	}
     	
     	return builder.toString();

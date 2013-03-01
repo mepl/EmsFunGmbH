@@ -47,7 +47,8 @@ public class EventServlet extends HttpServlet {
     		builder.append(event.getBezeichnung());
     		builder.append("</td><td>");
     		builder.append(event.getBeschreibung());
-    		builder.append("</td><td><input type=\"button\" value=\"Ändern\" id=\"editEvent\"></td></tr>");
+    		builder.append("</td><td><button id=\"editEvent" + i + "\" onClick=\"$(this).EditEvent();\">Ändern</Button></td></tr>");
+    		//builder.append("</td><td><input type=\"button\" value=\"Ändern\" class=\"editEvent\"></td></tr>");
     	}
     	
     	return builder.toString();

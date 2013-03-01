@@ -14,6 +14,15 @@
 	<script type="text/javascript" src="jquery-ui-1.9.1.custom/js/jquery-ui-1.9.1.custom.js"></script>
 	<script type="text/javascript" src="jquery-ui-1.9.1.custom/js/jquery-ui-1.9.1.custom.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="jquery-ui-1.9.1.custom/css/smoothness/jquery-ui-1.9.1.custom.css">
+	<script language="javascript">
+	    $.fn.EditEvent = function(){$("#editdialog").dialog('open');
+		return false;
+				};
+				
+		$.fn.EditEventDaten = function(){$("#editdialog2").dialog('open');
+		return false;
+				};
+ 	</script>
 	</head>
 	<body onload="custom();">
 		<div class="header">Eventmanagementsystem<img src="images/logo.jpg" id="logo"></div>

@@ -167,32 +167,20 @@ $("#dialog2").dialog({
 		$("#AddEVV").css('font-size', '10Px');
 		
 //Erstellen jquery EditEventbutton
-	
+		$( ".selector" ).dialog({
+			   open: function(event, ui) {
+			     $('#divInDialog').load('login.jsp', function() {
+			       alert('Load was performed.');
+			     });
+			   }
+			});
+//		<div class="selector"/>
+//		<div id="divInDialog"></div>
 		$("#editEvent").click(function(){
 		$("#editdialog").dialog('open');
 		return false;
 				});
-				
-		$("#editEvent2").click(function(){
-		$("#editdialog").dialog('open');
-		return false;
-				});
-				
-		$("#editEvent3").click(function(){
-		$("#editdialog").dialog('open');
-		return false;
-				});
-				
-		$("#editEvent4").click(function(){
-		$("#editdialog").dialog('open');
-		return false;
-				});
-				
-		$("#editEvent5").click(function(){
-		$("#editdialog").dialog('open');
-		return false;
-				});
-				
+			
 		$("#editEV").click(function(){
 		$("#editdialog2").dialog('open');
 		return false;
@@ -278,7 +266,6 @@ $("#dialog2").dialog({
     	
     	buttons: {
     		OK: function() {
-    	              //$("#editdialog > form").submit();
     		  $(this).dialog('close');
     		},
     		Abbrechen: function() {
@@ -286,6 +273,7 @@ $("#dialog2").dialog({
     		}
     	}
     });
+ 
     $('#benutzerDel').click(function() {
     	$('#editdialog').dialog('open');
     });
